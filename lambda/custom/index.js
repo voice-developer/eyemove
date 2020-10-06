@@ -16,10 +16,31 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         const speakOutput = handlerInput.t('WELCOME_MSG');
 
-        return handlerInput.responseBuilder
+        if (deviceHasDisplay(handlerInput)) {
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                document: require('./haunted.json'),
+                datasources: {
+                    "hauntData":{
+                        "images":{
+                            "eyes": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait_eyes.png"
+                        },
+                        "eyeProp":{
+                            "dist": 10
+                        }
+                    }
+                }
+              })
+            .getResponse();
+          }else{
+            return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
+          }
     }
 };
 
@@ -67,6 +88,21 @@ const CancelAndStopIntentHandler = {
             .getResponse();
     }
 };
+
+function deviceHasDisplay(handlerInput) {
+    
+    var result = 
+      handlerInput &&
+      handlerInput.requestEnvelope &&
+      handlerInput.requestEnvelope.context &&
+      handlerInput.requestEnvelope.context.System &&
+      handlerInput.requestEnvelope.context.System.device &&
+      handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
+      handlerInput.requestEnvelope.context.System.device.supportedInterfaces.hasOwnProperty('Alexa.Presentation.APL');
+  
+    return result;
+  }
+
 /* *
  * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
  * It must also be defined in the language model (if the locale supports it)

@@ -1,0 +1,259 @@
+{
+    
+    "type": "APL",
+    "version": "1.4",
+    "extensions": [
+    {
+      "name": "SmartMotion",
+      "uri": "alexaext:smartmotion:10"
+    },
+    {
+      "name": "EntitySensing",
+      "uri": "alexaext:entitySensing:10"
+    }
+  ],
+    "settings": {
+    "SmartMotion": {
+      "deviceStateName": "MyDeviceState",
+      "wakeWordResponse": "followOnWakeWord"
+    },
+    "EntitySensing": {
+      "entitySensingStateName": "MyEntitySensingState",
+      "primaryUserName": "MyPrimaryUser"
+    }
+  },
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [
+        
+        
+    ],
+    "styles": {},
+    "layouts": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Frame",
+                "height": "100vh",
+                "width": "100vw",
+                "backgroundColor": "#e2e6e9",
+                "items": [
+                    {
+                        "when": "${@viewportProfile == @hubRoundSmall}",
+                        "type": "Container",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "items": [
+                             {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/hauntedbg1.jpg",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "position": "absolute",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "${payload.hauntData.images.eyes}",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "${payload.hauntData.eyeProp.dist}vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait.png",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "10vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            }
+                        ]
+                    },
+                    {
+                        "when": "${@viewportProfile == @hubLandscapeSmall}",
+                        "type": "Container",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/hauntedbg1.jpg",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "position": "absolute",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "${payload.hauntData.images.eyes}",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "${payload.hauntData.eyeProp.dist}vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait.png",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "10vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            }
+                        ]
+                    },
+                    {
+                        "when": "${@viewportProfile == @hubLandscapeMedium}",
+                        "type": "Container",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/hauntedbg1.jpg",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "position": "absolute",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "${payload.hauntData.images.eyes}",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "@eyeLeft",
+                                "top": "5vh",
+                                "position": "absolute"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait.png",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "10vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            }
+                        ]
+                    },
+                    {
+                        "when": "${@viewportProfile == @hubLandscapeLarge}",
+                        "type": "Container",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "items": [
+                           {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/hauntedbg1.jpg",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "position": "absolute",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait.png",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "10vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            },
+                            {
+                                
+                                "type": "Image",
+                                "id": "eyes",
+                                "source": "${payload.hauntData.images.eyes}",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "transform": [{
+                                    "translateX": "${Math.clamp(0, MyDeviceState.poise.absoluteAngle +10, 100)}vw"
+                                    }],
+                                "top": "5vh",
+                                "position": "absolute"
+                            },
+                            {
+                              "type": "Text",
+                              "id": "MyTextBox",
+                              "text": "Device angle is ${MyDeviceState.poise.absoluteAngle} / Eyes are ${MyDeviceState.poise.absoluteAngle +10} / @eyesLeft"
+                            },
+                            {
+                                "type": "Text",
+                                "top": "15vh",
+                                "id": "MyTextBox",
+                                "text": "${MyPrimaryUser.isSeen ? 'User located at ${MyPrimaryUser.poise.absoluteAngle} degrees.' : 'Nobody here'}"
+                              },
+                              {
+                                "type": "Text",
+                                "top": "25vh",
+                                "id": "textUserId",
+                                "text": "id: ${MyPrimaryUser.id}"
+                              },
+                              {
+                                "type": "Text",
+                                "top": "35vh",
+                                "id": "textUserActive",
+                                "text": "isActive: ${MyPrimaryUser.isActive}"
+                              },
+                              {
+                                "type": "Text",
+                                "top": "45vh",
+                                "id": "textUserSeen",
+                                "text": "isSeen: ${MyPrimaryUser.isSeen}"
+                              }
+                            
+                        ]
+                    },
+                    {
+                        "when": "${@viewportProfile == @tvLandscapeXLarge}",
+                        "type": "Container",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/hauntedbg1.jpg",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "position": "absolute",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "${payload.hauntData.images.eyes}",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "${payload.hauntData.eyeProp.dist}vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            },
+                            {
+                                "type": "Image",
+                                "source": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait.png",
+                                "height": "90vh",
+                                "width": "80vw",
+                                "left": "10vw",
+                                "top": "5vh",
+                                "position": "absolute"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
