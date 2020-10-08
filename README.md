@@ -1,19 +1,14 @@
 # Alexa APL/APLA & Motion API demo
 
-### This is a simple tutorial to introduce a simple Alexa skill and code.
 
 ## Skill Architecture
-Each skill consists of two basic parts, a front end and a back end.
-The front end is the voice interface, or VUI.
-The voice interface is configured through the voice interaction model.
-The back end is where the logic of your skill resides.
+This skill started life as the Alexa Hello World Template.
+I then added APL, APLA, & the Motion API (with the APL document)
 
-## Three Options for Skill Setup
-There are a number of different ways for you to setup your skill, depending on your experience and what tools you have available.
+## Getting APL & Motion API working
+* To get APL working, you need to select the APL option within the Alexa Developer console > Interfaces > APL (Tick for echo show 5 whilst you're at it).
+* When activating APL also click to activate the Motion & Sensing API extentions, and set the quick start policy to "Follow on Wake Word".
 
- * If this is your first skill, choose the [Alexa-Hosted backend instructions](./instructions/setup-vui-alexa-hosted.md) to get started quickly.
- * If you want to manage the backend resources in your own AWS account, you can follow the [AWS-Hosted instructions](./instructions/setup-vui-aws-hosted.md).
- * Developers with the ASK Command Line Interface configured may follow the [ASK CLI instructions](./instructions/cli.md).
 
 ---
 
