@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-eyeMove-default",
             "handler": "index.handler",
-            "revisionId": "7a285885-aefb-4247-8b68-850dac97e05a",
+            "revisionId": "48271df0-10fb-4f57-ac5a-492471cea0ad",
             "runtime": "nodejs10.x"
           }
         ]

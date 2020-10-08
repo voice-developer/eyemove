@@ -3,6 +3,8 @@
  * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
  * session persistence, api calls, and more.
  * */
+
+ // This skill has been created using the Alexa Hello world template and then tweaking it, adding in APLA, APL, & the Motion API.
 const Alexa = require('ask-sdk-core');
 // i18n library dependency, we use it below in a localisation interceptor
 const i18n = require('i18next');
@@ -14,34 +16,38 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = handlerInput.t('WELCOME_MSG');
 
-        if (deviceHasDisplay(handlerInput)) {
-            return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .addDirective({
-                type: 'Alexa.Presentation.APL.RenderDocument',
-                document: require('./haunted.json'),
-                datasources: {
-                    "hauntData":{
-                        "images":{
-                            "eyes": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait_eyes.png"
-                        },
-                        "eyeProp":{
-                            "dist": 10
+        
+        // Add APL directive to response
+        if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
+            // Create Render Directive
+            handlerInput.responseBuilder
+                .addDirective({
+                    type: 'Alexa.Presentation.APL.RenderDocument',
+                    token: 'token',
+                    document: require('./haunted.json'),
+                    datasources: {
+                        "hauntData":{
+                            "images":{
+                                "eyes": "https://pockoalexa.s3.amazonaws.com/APL_DEMO/spookyPortrait_eyes.png"
+                            },
+                            "eyeProp":{
+                                "dist": 10
+                            }
                         }
                     }
-                }
-              })
+                })
+        }
+
+        return handlerInput.responseBuilder
+            .addDirective({
+                type: 'Alexa.Presentation.APLA.RenderDocument',
+                token: 'token',
+                document: require('./eyeMoveAPLA.json'),
+                datasources: {}
+            })
             .getResponse();
-          }else{
-            return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-          }
-    }
+    },
 };
 
 const HelloWorldIntentHandler = {
@@ -89,19 +95,7 @@ const CancelAndStopIntentHandler = {
     }
 };
 
-function deviceHasDisplay(handlerInput) {
-    
-    var result = 
-      handlerInput &&
-      handlerInput.requestEnvelope &&
-      handlerInput.requestEnvelope.context &&
-      handlerInput.requestEnvelope.context.System &&
-      handlerInput.requestEnvelope.context.System.device &&
-      handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
-      handlerInput.requestEnvelope.context.System.device.supportedInterfaces.hasOwnProperty('Alexa.Presentation.APL');
-  
-    return result;
-  }
+
 
 /* *
  * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
