@@ -1,5 +1,4 @@
-# Build An Alexa Hello World Skill
-<img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/header._TTH_.png" />
+# Alexa APL/APLA & Motion API demo
 
 ### This is a simple tutorial to introduce a simple Alexa skill and code.
 
